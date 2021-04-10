@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<departments xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.company.com/departments"
+	xsi:schemaLocation="http://www.company.com/departments departments.xsd">
+	
+	<department id="d-0" name="sales">
+		<employee id="e-0">
+			<forename>John</forename>
+			<surname>Johnson</surname>
+			<salary>1400</salary>
+		</employee>
+	</department>
+	
+	<department id="d-1" name="finance">
+		<employee id="e-1">
+			<forename>Jack</forename>
+			<surname>Jackson</surname>
+			<salary>1200</salary>
+		</employee>
+		
+		<employee id="e-2">
+			<forename>Emily</forename>
+			<surname>Smith</surname>
+			<salary>1500</salary>
+		</employee>
+	</department>
+</departments>
