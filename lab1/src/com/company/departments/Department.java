@@ -137,4 +137,15 @@ public class Department {
         this.name = value;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("\n[Department]: ");
+
+        result.append("\n\tID: ").append(id).append("\n\tName: ").append(name).append("\n");
+        for (Employee e : employee) {
+            result.append(e);
+        }
+
+        return result.toString();
+    }
 }

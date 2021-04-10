@@ -164,4 +164,8 @@ public class Employee {
         this.id = value;
     }
 
+    @Override
+    public String toString() {
+        return "\t\t[Employee]: " + "\n\t\t\tID: " + id + "\n\t\t\tForename: " + forename + "\n\t\t\tSurname: " + surname + "\n\t\t\tSalary: " + salary + "\n";
+    }
 }
