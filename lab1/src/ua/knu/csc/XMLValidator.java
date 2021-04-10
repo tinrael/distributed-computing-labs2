@@ -14,7 +14,7 @@ import javax.xml.validation.Validator;
 
 import org.xml.sax.SAXException;
 
-// This validator validates that an XML document is well-formed and valid.
+// This validator validates that an XML document is well-formed and valid (i.e. syntax-check and validates against the specified XSD).
 public class XMLValidator {
 
     public static boolean validate(String xmlFileLocation, String xsdFileLocation) {
