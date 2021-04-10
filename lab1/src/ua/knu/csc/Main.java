@@ -3,6 +3,7 @@ package ua.knu.csc;
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+        DOMBuilder domBuilder = new DOMBuilder();
+        System.out.println(domBuilder.build("data/departments.xml"));
     }
 }
