@@ -40,8 +40,8 @@ public class Manager {
         }
     }
 
-    public void loadFromFile(String filename) {
-        departments = domBuilder.build(filename);
+    public void loadFromFile(String xmlFileLocation) {
+        departments = domBuilder.build(xmlFileLocation);
     }
 
     public void addDepartment(String id, String name) throws IllegalArgumentException {
