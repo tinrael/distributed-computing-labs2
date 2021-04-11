@@ -48,6 +48,7 @@ public class Manager {
                 return;
             }
         }
+        throw new IllegalArgumentException("A department with the specified ID '" + id + "' does not exist.");
     }
 
     public void addEmployee(String employeeId, String forename, String surname, BigInteger salary, String departmentId) throws IllegalArgumentException {
