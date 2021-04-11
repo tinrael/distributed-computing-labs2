@@ -39,7 +39,7 @@ public class Manager {
         throw new IllegalArgumentException("A department with the specified ID '" + id + "' does not exist.");
     }
 
-    public void deleteDepartment(String id) {
+    public void deleteDepartment(String id) throws IllegalArgumentException {
         Iterator<Department> iterator = departments.iterator();
         while (iterator.hasNext()) {
             Department department = iterator.next();
@@ -82,7 +82,7 @@ public class Manager {
         throw new IllegalArgumentException("An employee with the specified ID '" + id + "' does not exist.");
     }
 
-    public void deleteEmployee(String id) {
+    public void deleteEmployee(String id) throws IllegalArgumentException {
         for (Department department : departments) {
             Iterator<Employee> iterator = department.getEmployee().iterator();
             while (iterator.hasNext()) {
