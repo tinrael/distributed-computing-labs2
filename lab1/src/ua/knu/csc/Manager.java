@@ -122,4 +122,8 @@ public class Manager {
         }
         throw new IllegalArgumentException("An employee with the specified ID '" + id + "' does not exist.");
     }
+
+    public synchronized void print() {
+        System.out.println(departments);
+    }
 }
