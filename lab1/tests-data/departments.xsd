@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.company.com/departments"
+	xmlns:tns="http://www.company.com/departments"
+	elementFormDefault="qualified">
+	
+	<element name="departments">
+		<complexType>
+			<sequence>
+				<element name="department" type="tns:Department" minOccurs="0" maxOccurs="unbounded" />
+			</sequence>
+		</complexType>
+	</element>
+	
+	<complexType name="Department">
+		<sequence>
+			<element name="employee" type="tns:Employee" minOccurs="0" maxOccurs="unbounded" />
+		</sequence>
+		<attribute name="id" use="required">
+			<simpleType>
+				<restriction base="ID">
+					<pattern value="[d][-]([0-9])+" />
+				</restriction>
+			</simpleType>
+		</attribute>
+		<attribute name="name" type="string" use="required" />
+	</complexType>
+	
+	<complexType name="Employee">
+		<sequence>
+			<element name="forename" type="string" />
+			<element name="surname" type="string" />
+			<element name="salary" type="positiveInteger" />
+		</sequence>
+		<attribute name="id" use="required">
+			<simpleType>
+				<restriction base="ID">
+					<pattern value="[e][-]([0-9])+" />
+				</restriction>
+			</simpleType>
+		</attribute>
+	</complexType>
+</schema>
