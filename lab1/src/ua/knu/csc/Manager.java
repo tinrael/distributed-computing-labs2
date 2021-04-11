@@ -80,4 +80,18 @@ public class Manager {
         }
         throw new IllegalArgumentException("An employee with the specified ID '" + id + "' does not exist.");
     }
+
+    public void deleteEmployee(String id) {
+        for (Department department : departments) {
+            Iterator<Employee> iterator = department.getEmployee().iterator();
+            while (iterator.hasNext()) {
+                Employee employee = iterator.next();
+                if (employee.getId().equals(id)) {
+                    iterator.remove();
+                    return;
+                }
+            }
+        }
+        throw new IllegalArgumentException("An employee with the specified ID '" + id + "' does not exist.");
+    }
 }
