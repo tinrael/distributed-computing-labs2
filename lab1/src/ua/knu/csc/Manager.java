@@ -3,15 +3,42 @@ package ua.knu.csc;
 import com.company.departments.Department;
 import com.company.departments.Employee;
 
+import java.util.Set;
+import java.util.Iterator;
+
 import java.math.BigInteger;
 
-import java.util.Iterator;
-import java.util.Set;
+import java.io.File;
+
+import org.w3c.dom.Document;
+
+import javax.xml.transform.*;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 public class Manager {
     private Set<Department> departments;
 
     private final DOMBuilder domBuilder = new DOMBuilder();
+
+    public void saveToFile(String xmlFilename) {
+        try {
+            Transformer transformer = TransformerFactory.newInstance().newTransformer();
+            transformer.setOutputProperty(OutputKeys.ENCODING,"UTF-8");
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+
+            Document document = domBuilder.createXmlDocument(departments);
+            Source source = new DOMSource(document);
+            Result result = new StreamResult(new File(xmlFilename));
+
+            transformer.transform(source, result);
+        } catch (TransformerConfigurationException e) {
+            System.err.println("[manager]: TransformerConfigurationException: " + e.getMessage());
+        } catch (TransformerException e) {
+            System.err.println("[manager]: TransformerException: " + e.getMessage());
+        }
+    }
 
     public void loadFromFile(String filename) {
         departments = domBuilder.build(filename);
