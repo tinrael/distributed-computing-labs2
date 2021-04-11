@@ -21,7 +21,7 @@ public class Manager {
 
     private final DOMBuilder domBuilder = new DOMBuilder();
 
-    public void saveToFile(String xmlFilename) {
+    public synchronized void saveToFile(String xmlFilename) {
         try {
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
             transformer.setOutputProperty(OutputKeys.ENCODING,"UTF-8");
@@ -40,11 +40,11 @@ public class Manager {
         }
     }
 
-    public void loadFromFile(String xmlFileLocation) {
+    public synchronized void loadFromFile(String xmlFileLocation) {
         departments = domBuilder.build(xmlFileLocation);
     }
 
-    public void addDepartment(String id, String name) throws IllegalArgumentException {
+    public synchronized void addDepartment(String id, String name) throws IllegalArgumentException {
         if (departments.stream().anyMatch(department -> department.getId().equals(id))) {
             throw new IllegalArgumentException("A department with the specified ID '" + id + "' already exists.");
         }
@@ -57,7 +57,7 @@ public class Manager {
         departments.add(department);
     }
 
-    public Department getDepartment(String id) throws IllegalArgumentException {
+    public synchronized Department getDepartment(String id) throws IllegalArgumentException {
         for (Department department : departments) {
             if (department.getId().equals(id)) {
                 return department;
@@ -66,7 +66,7 @@ public class Manager {
         throw new IllegalArgumentException("A department with the specified ID '" + id + "' does not exist.");
     }
 
-    public void deleteDepartment(String id) throws IllegalArgumentException {
+    public synchronized void deleteDepartment(String id) throws IllegalArgumentException {
         Iterator<Department> iterator = departments.iterator();
         while (iterator.hasNext()) {
             Department department = iterator.next();
@@ -78,7 +78,7 @@ public class Manager {
         throw new IllegalArgumentException("A department with the specified ID '" + id + "' does not exist.");
     }
 
-    public void addEmployee(String employeeId, String forename, String surname, BigInteger salary, String departmentId) throws IllegalArgumentException {
+    public synchronized void addEmployee(String employeeId, String forename, String surname, BigInteger salary, String departmentId) throws IllegalArgumentException {
         for (Department department : departments) {
             for (Employee employee : department.getEmployee()) {
                 if (employee.getId().equals(employeeId)) {
@@ -98,7 +98,7 @@ public class Manager {
         department.getEmployee().add(employee);
     }
 
-    public Employee getEmployee(String id) throws IllegalArgumentException {
+    public synchronized Employee getEmployee(String id) throws IllegalArgumentException {
         for (Department department : departments) {
             for (Employee employee : department.getEmployee()) {
                 if (employee.getId().equals(id)) {
@@ -109,7 +109,7 @@ public class Manager {
         throw new IllegalArgumentException("An employee with the specified ID '" + id + "' does not exist.");
     }
 
-    public void deleteEmployee(String id) throws IllegalArgumentException {
+    public synchronized void deleteEmployee(String id) throws IllegalArgumentException {
         for (Department department : departments) {
             Iterator<Employee> iterator = department.getEmployee().iterator();
             while (iterator.hasNext()) {
