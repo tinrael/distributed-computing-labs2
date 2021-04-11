@@ -94,4 +94,41 @@ public class DOMBuilder {
             return (textContent == null) ? "" : textContent;
         }
     }
+
+    public Document createXmlDocument(Set<Department> departments) {
+        Document document = documentBuilder.newDocument();
+
+        Element rootElement = document.createElement("departments");
+        document.appendChild(rootElement);
+
+        for (Department department : departments) {
+            Element departmentElement = document.createElement("department");
+            departmentElement.setAttribute("id", department.getId());
+            departmentElement.setAttribute("name", department.getName());
+
+            for (Employee employee : department.getEmployee()) {
+                Element employeeElement = document.createElement("employee");
+                employeeElement.setAttribute("id", employee.getId());
+
+                Element forenameElement = document.createElement("forename");
+                forenameElement.appendChild(document.createTextNode(employee.getForename()));
+
+                Element surnameElement = document.createElement("surname");
+                surnameElement.appendChild(document.createTextNode(employee.getSurname()));
+
+                Element salaryElement = document.createElement("salary");
+                salaryElement.appendChild(document.createTextNode(employee.getSalary().toString()));
+
+                employeeElement.appendChild(forenameElement);
+                employeeElement.appendChild(surnameElement);
+                employeeElement.appendChild(salaryElement);
+
+                departmentElement.appendChild(employeeElement);
+            }
+
+            rootElement.appendChild(departmentElement);
+        }
+
+        return document;
+    }
 }
