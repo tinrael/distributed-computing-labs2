@@ -5,6 +5,7 @@ import com.company.departments.Employee;
 
 import java.math.BigInteger;
 
+import java.util.Iterator;
 import java.util.Set;
 
 public class Manager {
@@ -36,6 +37,17 @@ public class Manager {
             }
         }
         throw new IllegalArgumentException("A department with the specified ID '" + id + "' does not exist.");
+    }
+
+    public void deleteDepartment(String id) {
+        Iterator<Department> iterator = departments.iterator();
+        while (iterator.hasNext()) {
+            Department department = iterator.next();
+            if (department.getId().equals(id)) {
+                iterator.remove();
+                return;
+            }
+        }
     }
 
     public void addEmployee(String employeeId, String forename, String surname, BigInteger salary, String departmentId) throws IllegalArgumentException {
