@@ -44,10 +44,15 @@ public class Manager {
                 "WHERE department_id = '" + id + "';";
 
         try {
-            statement.executeUpdate(sql);
+            int rowsAffectedCount = statement.executeUpdate(sql);
 
-            System.out.println("[SUCCESS]: The department with the identifier '" + id + "' successfully updated.");
-            return true;
+            if (rowsAffectedCount > 0) {
+                System.out.println("[SUCCESS]: The department with the identifier '" + id + "' successfully updated.");
+                return true;
+            } else {
+                System.err.println("[FAIL]: The department with the identifier '" + id + "' not found.");
+                return false;
+            }
         } catch (SQLException throwable) {
             System.err.println("[FAIL]: Unable to update the department with the identifier '" + id + "'.");
 
