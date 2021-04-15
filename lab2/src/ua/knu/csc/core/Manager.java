@@ -103,6 +103,30 @@ public class Manager {
         }
     }
 
+    public boolean updateEmployee(String employeeId, String forename, String surname, BigInteger salary, String departmentId) {
+        String sql = "UPDATE employee " +
+                "SET forename = '" + forename + "', surname = '" + surname + "', salary = " + salary + ", department_id = '" + departmentId + "' " +
+                "WHERE employee_id = '" + employeeId + "';";
+
+        try {
+            int rowsAffectedCount = statement.executeUpdate(sql);
+
+            if (rowsAffectedCount > 0) {
+                System.out.println("[SUCCESS]: The employee with the identifier '" + employeeId + "' successfully updated.");
+                return true;
+            } else {
+                System.err.println("[FAIL]: The employee with the identifier '" + employeeId + "' not found.");
+                return false;
+            }
+        } catch (SQLException throwable) {
+            System.err.println("[FAIL]: Unable to update the employee with the identifier '" + employeeId + "'.");
+
+            throwable.printStackTrace();
+
+            return false;
+        }
+    }
+
     public boolean deleteEmployee(String id) {
         String sql = "DELETE FROM employee WHERE employee_id = '" + id + "';";
 
