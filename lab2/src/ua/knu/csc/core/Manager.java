@@ -38,6 +38,25 @@ public class Manager {
         }
     }
 
+    public boolean updateDepartment(String id, String name) {
+        String sql = "UPDATE department " +
+                "SET name = '" + name + "' " +
+                "WHERE department_id = '" + id + "';";
+
+        try {
+            statement.executeUpdate(sql);
+
+            System.out.println("[SUCCESS]: The department with the identifier '" + id + "' successfully updated.");
+            return true;
+        } catch (SQLException throwable) {
+            System.err.println("[FAIL]: Unable to update the department with the identifier '" + id + "'.");
+
+            throwable.printStackTrace();
+
+            return false;
+        }
+    }
+
     public boolean deleteDepartment(String id) {
         String sql = "DELETE FROM department WHERE department_id = '" + id + "';";
 
