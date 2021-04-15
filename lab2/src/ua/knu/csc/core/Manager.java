@@ -86,7 +86,7 @@ public class Manager {
             int rowCount = statement.executeUpdate(sql);
 
             if (rowCount > 0) {
-                System.out.println("[SUCCESS]: The employee with the identifier '" + id + "' successfully added.");
+                System.out.println("[SUCCESS]: The employee with the identifier '" + id + "' successfully deleted.");
                 return true;
             } else {
                 System.err.println("[FAIL]: The employee with the identifier '" + id + "' not found.");
