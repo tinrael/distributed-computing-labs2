@@ -21,7 +21,7 @@ public class Manager {
     }
 
     public boolean addDepartment(String id, String name) {
-        String sql = "INSERT INTO department VALUES" +
+        String sql = "INSERT INTO department VALUES " +
                 "('" + id + "', '" + name + "');";
 
         try {
@@ -61,7 +61,7 @@ public class Manager {
     }
 
     public boolean addEmployee(String employeeId, String forename, String surname, BigInteger salary, String departmentId) {
-        String sql = "INSERT INTO employee VALUES" +
+        String sql = "INSERT INTO employee VALUES " +
                 "('" + employeeId + "', '" + forename +
                 "', '" + surname + "', " + salary + ", '" + departmentId + "');";
 
