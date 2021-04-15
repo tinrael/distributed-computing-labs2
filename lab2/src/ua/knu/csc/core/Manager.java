@@ -30,7 +30,7 @@ public class Manager {
             System.out.println("[SUCCESS]: The " + name + " department successfully added.");
             return true;
         } catch (SQLException throwable) {
-            System.out.println("[FAIL]: Unable to add the " + name + " department.");
+            System.err.println("[FAIL]: Unable to add the " + name + " department.");
 
             throwable.printStackTrace();
 
@@ -48,11 +48,11 @@ public class Manager {
                 System.out.println("[SUCCESS]: The department with the identifier '" + id + "' successfully deleted.");
                 return true;
             } else {
-                System.out.println("[FAIL]: The department with the identifier '" + id + "' not found.");
+                System.err.println("[FAIL]: The department with the identifier '" + id + "' not found.");
                 return false;
             }
         } catch (SQLException throwable) {
-            System.out.println("[FAIL]: Unable to delete the department with the identifier '" + id + "'.");
+            System.err.println("[FAIL]: Unable to delete the department with the identifier '" + id + "'.");
 
             throwable.printStackTrace();
 
@@ -71,7 +71,7 @@ public class Manager {
             System.out.println("[SUCCESS]: The employee [" + forename + " " + surname + "] successfully added.");
             return true;
         } catch (SQLException throwable) {
-            System.out.println("[FAIL]: Unable to add the employee [" + forename + " " + surname + "].");
+            System.err.println("[FAIL]: Unable to add the employee [" + forename + " " + surname + "].");
 
             throwable.printStackTrace();
 
@@ -89,11 +89,11 @@ public class Manager {
                 System.out.println("[SUCCESS]: The employee with the identifier '" + id + "' successfully added.");
                 return true;
             } else {
-                System.out.println("[FAIL]: The employee with the identifier '" + id + "' not found.");
+                System.err.println("[FAIL]: The employee with the identifier '" + id + "' not found.");
                 return false;
             }
         } catch (SQLException throwable) {
-            System.out.println("[FAIL]: Unable to delete the employee with the identifier '" + id + "'.");
+            System.err.println("[FAIL]: Unable to delete the employee with the identifier '" + id + "'.");
 
             throwable.printStackTrace();
 
