@@ -42,9 +42,9 @@ public class Manager {
         String sql = "DELETE FROM department WHERE department_id = '" + id + "';";
 
         try {
-            int rowCount = statement.executeUpdate(sql);
+            int rowsAffectedCount = statement.executeUpdate(sql);
 
-            if (rowCount > 0) {
+            if (rowsAffectedCount > 0) {
                 System.out.println("[SUCCESS]: The department with the identifier '" + id + "' successfully deleted.");
                 return true;
             } else {
@@ -83,9 +83,9 @@ public class Manager {
         String sql = "DELETE FROM employee WHERE employee_id = '" + id + "';";
 
         try {
-            int rowCount = statement.executeUpdate(sql);
+            int rowsAffectedCount = statement.executeUpdate(sql);
 
-            if (rowCount > 0) {
+            if (rowsAffectedCount > 0) {
                 System.out.println("[SUCCESS]: The employee with the identifier '" + id + "' successfully deleted.");
                 return true;
             } else {
