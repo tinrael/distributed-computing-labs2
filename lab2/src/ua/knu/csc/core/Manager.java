@@ -7,7 +7,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Manager {
+public class Manager { // DAO (Data Access Object)
     private final Connection connection;
     private final Statement statement;
 
