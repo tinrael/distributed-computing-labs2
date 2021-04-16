@@ -67,6 +67,20 @@ public class EmployeePanel extends JPanel {
             }
         });
 
+        buttonDelete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                deleteEmployee();
+            }
+        });
+
+        buttonUpdate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateEmployee();
+            }
+        });
+
         refreshEmployeeIdsComboBox();
     }
 
@@ -88,6 +102,20 @@ public class EmployeePanel extends JPanel {
         if (isSuccessfullyAdded) {
             refreshEmployeeIdsComboBox();
             employeeIdsComboBox.setSelectedItem(employeeIdTextField.getText());
+        }
+    }
+
+    private void updateEmployee() {
+        manager.updateEmployee(employeeIdTextField.getText(), forenameTextField.getText(),
+                surnameTextField.getText(), new BigInteger(salaryTextField.getText()),
+                departmentIdTextField.getText());
+    }
+
+    private void deleteEmployee() {
+        boolean isSuccessfullyDeleted = manager.deleteEmployee(employeeIdTextField.getText());
+
+        if (isSuccessfullyDeleted) {
+            refreshEmployeeIdsComboBox();
         }
     }
 }
