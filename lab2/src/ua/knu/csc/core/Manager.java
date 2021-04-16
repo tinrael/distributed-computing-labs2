@@ -1,9 +1,13 @@
 package ua.knu.csc.core;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import java.math.BigInteger;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -147,5 +151,23 @@ public class Manager { // DAO (Data Access Object)
 
             return false;
         }
+    }
+
+    public List<String> getAllEmployeeIds() {
+        List<String> allEmployeeIds = new ArrayList<>();
+
+        String sql = "SELECT employee_id FROM employee;";
+
+        try {
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                allEmployeeIds.add(resultSet.getString("employee_id"));
+            }
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+
+        return allEmployeeIds;
     }
 }
