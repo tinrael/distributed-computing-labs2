@@ -164,7 +164,10 @@ public class Manager { // DAO (Data Access Object)
             while (resultSet.next()) {
                 allEmployeeIds.add(resultSet.getString("employee_id"));
             }
+
+            System.out.println("[SUCCESS]: The employee identifiers successfully received from the database.");
         } catch (SQLException throwable) {
+            System.err.println("[FAIL]: Unable to get the employee identifiers from the database.");
             throwable.printStackTrace();
         }
 
