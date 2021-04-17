@@ -1,6 +1,7 @@
 package ua.knu.csc.ui;
 
 import ua.knu.csc.core.Manager;
+import ua.knu.csc.entity.Department;
 
 import java.util.List;
 
@@ -45,6 +46,13 @@ public class DepartmentPanel extends JPanel {
 
         add(buttonUpdate);
 
+        departmentIdsComboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showCurrentSelectedDepartment();
+            }
+        });
+
         buttonAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -67,6 +75,19 @@ public class DepartmentPanel extends JPanel {
         });
 
         refreshDepartmentIdsComboBox();
+    }
+
+    private void showCurrentSelectedDepartment() {
+        String departmentId = (String) departmentIdsComboBox.getSelectedItem();
+
+        if (departmentId != null) {
+            Department department = manager.getDepartment(departmentId);
+
+            if (department != null) {
+                departmentIdTextField.setText(department.getDepartmentId());
+                nameTextField.setText(department.getName());
+            }
+        }
     }
 
     private void refreshDepartmentIdsComboBox() {
