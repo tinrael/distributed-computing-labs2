@@ -52,6 +52,13 @@ public class DepartmentPanel extends JPanel {
             }
         });
 
+        buttonUpdate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateDepartment();
+            }
+        });
+
         refreshDepartmentIdsComboBox();
     }
 
@@ -77,5 +84,9 @@ public class DepartmentPanel extends JPanel {
                 departmentIdsComboBox.setSelectedItem(departmentId);
             }
         }
+    }
+
+    private void updateDepartment() {
+        manager.updateDepartment(departmentIdTextField.getText(), nameTextField.getText());
     }
 }
