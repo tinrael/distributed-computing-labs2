@@ -126,7 +126,10 @@ public class EmployeePanel extends JPanel {
 
         if (isSuccessfullyAdded) {
             employeeIdsComboBox.addItem(employeeId);
-            employeeIdsComboBox.setSelectedItem(employeeId);
+
+            if (employeeIdsComboBox.getItemCount() > 1) {
+                employeeIdsComboBox.setSelectedItem(employeeId);
+            }
         }
     }
 
