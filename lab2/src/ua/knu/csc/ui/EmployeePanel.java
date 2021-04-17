@@ -61,6 +61,13 @@ public class EmployeePanel extends JPanel {
 
         add(buttonUpdate);
 
+        employeeIdsComboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showCurrentSelectedEmployee();
+            }
+        });
+
         buttonAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
