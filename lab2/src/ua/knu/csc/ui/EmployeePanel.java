@@ -121,13 +121,15 @@ public class EmployeePanel extends JPanel {
     }
 
     private void addEmployee() {
-        boolean isSuccessfullyAdded = manager.addEmployee(employeeIdTextField.getText(), forenameTextField.getText(),
+        String employeeId = employeeIdTextField.getText();
+
+        boolean isSuccessfullyAdded = manager.addEmployee(employeeId, forenameTextField.getText(),
                 surnameTextField.getText(), new BigInteger(salaryTextField.getText()),
                 departmentIdTextField.getText());
 
         if (isSuccessfullyAdded) {
-            refreshEmployeeIdsComboBox();
-            employeeIdsComboBox.setSelectedItem(employeeIdTextField.getText());
+            employeeIdsComboBox.addItem(employeeId);
+            employeeIdsComboBox.setSelectedItem(employeeId);
         }
     }
 
@@ -138,10 +140,12 @@ public class EmployeePanel extends JPanel {
     }
 
     private void deleteEmployee() {
-        boolean isSuccessfullyDeleted = manager.deleteEmployee(employeeIdTextField.getText());
+        String employeeId = employeeIdTextField.getText();
+
+        boolean isSuccessfullyDeleted = manager.deleteEmployee(employeeId);
 
         if (isSuccessfullyDeleted) {
-            refreshEmployeeIdsComboBox();
+            employeeIdsComboBox.removeItem(employeeId);
         }
     }
 }
