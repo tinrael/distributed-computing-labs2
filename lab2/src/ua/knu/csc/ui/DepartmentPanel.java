@@ -2,6 +2,8 @@ package ua.knu.csc.ui;
 
 import ua.knu.csc.core.Manager;
 
+import java.util.List;
+
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
@@ -40,5 +42,17 @@ public class DepartmentPanel extends JPanel {
         add(buttonDelete);
 
         add(buttonUpdate);
+
+        refreshDepartmentIdsComboBox();
+    }
+
+    private void refreshDepartmentIdsComboBox() {
+        departmentIdsComboBox.removeAllItems();
+
+        List<String> allDepartmentIds = manager.getAllDepartmentIds();
+
+        for (String departmentId : allDepartmentIds) {
+            departmentIdsComboBox.addItem(departmentId);
+        }
     }
 }
