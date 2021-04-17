@@ -5,8 +5,6 @@ import ua.knu.csc.entity.Employee;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.math.BigInteger;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -90,7 +88,7 @@ public class Manager { // DAO (Data Access Object)
         }
     }
 
-    public boolean addEmployee(String employeeId, String forename, String surname, BigInteger salary, String departmentId) {
+    public boolean addEmployee(String employeeId, String forename, String surname, long salary, String departmentId) {
         String sql = "INSERT INTO employee VALUES " +
                 "('" + employeeId + "', '" + forename +
                 "', '" + surname + "', " + salary + ", '" + departmentId + "');";
@@ -109,7 +107,7 @@ public class Manager { // DAO (Data Access Object)
         }
     }
 
-    public boolean updateEmployee(String employeeId, String forename, String surname, BigInteger salary, String departmentId) {
+    public boolean updateEmployee(String employeeId, String forename, String surname, long salary, String departmentId) {
         String sql = "UPDATE employee " +
                 "SET forename = '" + forename + "', surname = '" + surname + "', salary = " + salary + ", department_id = '" + departmentId + "' " +
                 "WHERE employee_id = '" + employeeId + "';";

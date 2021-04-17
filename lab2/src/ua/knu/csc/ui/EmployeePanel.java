@@ -5,8 +5,7 @@ import ua.knu.csc.entity.Employee;
 
 import java.util.List;
 
-import java.math.BigInteger;
-
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,8 +14,6 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
-import java.awt.GridLayout;
 
 public class EmployeePanel extends JPanel {
     private final Manager manager;
@@ -124,7 +121,7 @@ public class EmployeePanel extends JPanel {
         String employeeId = employeeIdTextField.getText();
 
         boolean isSuccessfullyAdded = manager.addEmployee(employeeId, forenameTextField.getText(),
-                surnameTextField.getText(), new BigInteger(salaryTextField.getText()),
+                surnameTextField.getText(), Long.parseLong(salaryTextField.getText()),
                 departmentIdTextField.getText());
 
         if (isSuccessfullyAdded) {
@@ -135,7 +132,7 @@ public class EmployeePanel extends JPanel {
 
     private void updateEmployee() {
         manager.updateEmployee(employeeIdTextField.getText(), forenameTextField.getText(),
-                surnameTextField.getText(), new BigInteger(salaryTextField.getText()),
+                surnameTextField.getText(), Long.parseLong(salaryTextField.getText()),
                 departmentIdTextField.getText());
     }
 
