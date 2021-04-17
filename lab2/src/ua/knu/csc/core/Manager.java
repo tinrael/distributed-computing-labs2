@@ -72,7 +72,7 @@ public class Manager { // DAO (Data Access Object)
                 "FROM department " +
                 "WHERE department_id = '" + departmentId + "';";
 
-        try {
+        try (Statement otherStatement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(sql);
 
             if (resultSet.next()) {
@@ -85,7 +85,7 @@ public class Manager { // DAO (Data Access Object)
                         "FROM employee " +
                         "WHERE department_id = '" + departmentId + "';";
 
-                ResultSet employeeIdsResultSet = statement.executeQuery(query);
+                ResultSet employeeIdsResultSet = otherStatement.executeQuery(query);
 
                 while (employeeIdsResultSet.next()) {
                     Employee employee = getEmployee(employeeIdsResultSet.getString("employee_id"));
