@@ -5,6 +5,8 @@ import ua.knu.csc.core.Manager;
 import java.util.List;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -43,6 +45,13 @@ public class DepartmentPanel extends JPanel {
 
         add(buttonUpdate);
 
+        buttonAdd.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addDepartment();
+            }
+        });
+
         refreshDepartmentIdsComboBox();
     }
 
@@ -53,6 +62,20 @@ public class DepartmentPanel extends JPanel {
 
         for (String departmentId : allDepartmentIds) {
             departmentIdsComboBox.addItem(departmentId);
+        }
+    }
+
+    private void addDepartment() {
+        String departmentId = departmentIdTextField.getText();
+
+        boolean isSuccessfullyAdded = manager.addDepartment(departmentId, nameTextField.getText());
+
+        if (isSuccessfullyAdded) {
+            departmentIdsComboBox.addItem(departmentId);
+
+            if (departmentIdsComboBox.getItemCount() > 1) {
+                departmentIdsComboBox.setSelectedItem(departmentId);
+            }
         }
     }
 }
