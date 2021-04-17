@@ -88,6 +88,27 @@ public class Manager { // DAO (Data Access Object)
         }
     }
 
+    public List<String> getAllDepartmentIds() {
+        List<String> allDepartmentIds = new ArrayList<>();
+
+        String sql = "SELECT department_id FROM department;";
+
+        try {
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                allDepartmentIds.add(resultSet.getString("department_id"));
+            }
+
+            System.out.println("[SUCCESS]: The department identifiers successfully received from the database.");
+        } catch (SQLException throwable) {
+            System.err.println("[FAIL]: Unable to get the department identifiers from the database.");
+            throwable.printStackTrace();
+        }
+
+        return allDepartmentIds;
+    }
+
     public boolean addEmployee(String employeeId, String forename, String surname, long salary, String departmentId) {
         String sql = "INSERT INTO employee VALUES " +
                 "('" + employeeId + "', '" + forename +
