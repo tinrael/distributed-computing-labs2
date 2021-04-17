@@ -1,5 +1,7 @@
 package ua.knu.csc.core;
 
+import ua.knu.csc.entity.Employee;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -128,6 +130,39 @@ public class Manager { // DAO (Data Access Object)
             throwable.printStackTrace();
 
             return false;
+        }
+    }
+
+    public Employee getEmployee(String id) {
+        String sql = "SELECT forename, surname, salary, department_id " +
+                "FROM employee " +
+                "WHERE employee_id = '" + id + "';";
+
+        try {
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            if (resultSet.next()) {
+                Employee employee = new Employee();
+
+                employee.setEmployeeId(id);
+                employee.setForename(resultSet.getString("forename"));
+                employee.setSurname(resultSet.getString("surname"));
+                employee.setSalary(resultSet.getLong("salary"));
+                employee.setDepartmentId(resultSet.getString("department_id"));
+
+                System.out.println("[SUCCESS]: The employee with the identifier '" + id + "' successfully received from the database.");
+
+                return employee;
+            } else {
+                System.err.println("[FAIL]: The employee with the identifier '" + id + "' not found.");
+                return null;
+            }
+        } catch (SQLException throwable) {
+            System.err.println("[FAIL]: Unable to get the employee with the identifier '" + id + "' from the database.");
+
+            throwable.printStackTrace();
+
+            return null;
         }
     }
 
