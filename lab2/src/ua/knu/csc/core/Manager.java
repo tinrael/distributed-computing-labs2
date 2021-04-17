@@ -1,5 +1,6 @@
 package ua.knu.csc.core;
 
+import ua.knu.csc.entity.Department;
 import ua.knu.csc.entity.Employee;
 
 import java.util.ArrayList;
@@ -63,6 +64,53 @@ public class Manager { // DAO (Data Access Object)
             throwable.printStackTrace();
 
             return false;
+        }
+    }
+
+    public Department getDepartment(String departmentId) {
+        String sql = "SELECT name " +
+                "FROM department " +
+                "WHERE department_id = '" + departmentId + "';";
+
+        try {
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            if (resultSet.next()) {
+                Department department = new Department();
+
+                department.setDepartmentId(departmentId);
+                department.setName(resultSet.getString("name"));
+
+                String query = "SELECT employee_id " +
+                        "FROM employee " +
+                        "WHERE department_id = '" + departmentId + "';";
+
+                ResultSet employeeIdsResultSet = statement.executeQuery(query);
+
+                while (employeeIdsResultSet.next()) {
+                    Employee employee = getEmployee(employeeIdsResultSet.getString("employee_id"));
+
+                    if (employee == null) {
+                        System.err.println("[FAIL]: Unable to get the department with the identifier '" + departmentId + "' from the database.");
+                        return null;
+                    }
+
+                    department.getEmployees().add(employee);
+                }
+
+                System.out.println("[SUCCESS]: The department with the identifier '" + departmentId + "' successfully received from the database.");
+
+                return department;
+            } else {
+                System.err.println("[FAIL]: The department with the identifier '" + departmentId + "' not found.");
+                return null;
+            }
+        } catch (SQLException throwable) {
+            System.err.println("[FAIL]: Unable to get the department with the identifier '" + departmentId + "' from the database.");
+
+            throwable.printStackTrace();
+
+            return null;
         }
     }
 
