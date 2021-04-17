@@ -1,6 +1,7 @@
 package ua.knu.csc.ui;
 
 import ua.knu.csc.core.Manager;
+import ua.knu.csc.entity.Employee;
 
 import java.util.List;
 
@@ -82,6 +83,24 @@ public class EmployeePanel extends JPanel {
         });
 
         refreshEmployeeIdsComboBox();
+    }
+
+    private void showCurrentSelectedEmployee() {
+        String employeeId = (String) employeeIdsComboBox.getSelectedItem();
+
+        if (employeeId != null) {
+            Employee employee = manager.getEmployee(employeeId);
+
+            if (employee != null) {
+                employeeIdTextField.setText(employee.getEmployeeId());
+
+                forenameTextField.setText(employee.getForename());
+                surnameTextField.setText(employee.getSurname());
+                salaryTextField.setText(String.valueOf(employee.getSalary()));
+
+                departmentIdTextField.setText(employee.getDepartmentId());
+            }
+        }
     }
 
     private void refreshEmployeeIdsComboBox() {
