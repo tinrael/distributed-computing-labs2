@@ -52,6 +52,13 @@ public class DepartmentPanel extends JPanel {
             }
         });
 
+        buttonDelete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                deleteDepartment();
+            }
+        });
+
         buttonUpdate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -88,5 +95,15 @@ public class DepartmentPanel extends JPanel {
 
     private void updateDepartment() {
         manager.updateDepartment(departmentIdTextField.getText(), nameTextField.getText());
+    }
+
+    private void deleteDepartment() {
+        String departmentId = departmentIdTextField.getText();
+
+        boolean isSuccessfullyDeleted = manager.deleteDepartment(departmentId);
+
+        if (isSuccessfullyDeleted) {
+            departmentIdsComboBox.removeItem(departmentId);
+        }
     }
 }
