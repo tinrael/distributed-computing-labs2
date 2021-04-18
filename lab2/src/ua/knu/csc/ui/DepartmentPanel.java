@@ -6,16 +6,19 @@ import ua.knu.csc.entity.Employee;
 
 import java.util.List;
 
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 public class DepartmentPanel extends JPanel {
@@ -36,21 +39,31 @@ public class DepartmentPanel extends JPanel {
     public DepartmentPanel(Manager manager) {
         this.manager = manager;
 
-        setLayout(new GridLayout(5, 2));
+        setLayout(new FlowLayout());
 
-        add(new JLabel("choose department id"));
-        add(departmentIdsComboBox);
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(3, 2, 5, 5));
 
-        add(new JLabel("department id"));
-        add(departmentIdTextField);
+        panel.add(new JLabel("choose department id"));
+        panel.add(departmentIdsComboBox);
 
-        add(new JLabel("name"));
-        add(nameTextField);
+        panel.add(new JLabel("department id"));
+        panel.add(departmentIdTextField);
 
-        add(buttonAdd);
-        add(buttonDelete);
+        panel.add(new JLabel("name"));
+        panel.add(nameTextField);
 
-        add(buttonUpdate);
+        JPanel controlPanel = new JPanel();
+        controlPanel.add(buttonAdd);
+        controlPanel.add(buttonDelete);
+        controlPanel.add(buttonUpdate);
+
+        Box box = Box.createVerticalBox();
+        box.add(panel);
+        box.add(controlPanel);
+        box.add(new JScrollPane(employeesTable));
+
+        add(box);
 
         Object[] columnIdentifiers = {"employee_id", "forename", "surname", "salary", "department_id"};
         defaultTableModel.setColumnIdentifiers(columnIdentifiers);
