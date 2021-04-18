@@ -1,6 +1,6 @@
 package ua.knu.csc.ui;
 
-import ua.knu.csc.core.Manager;
+import ua.knu.csc.core.DataAccessObject;
 import ua.knu.csc.entity.Department;
 import ua.knu.csc.entity.Employee;
 
@@ -22,7 +22,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 public class DepartmentPanel extends JPanel {
-    private final Manager manager;
+    private final DataAccessObject dataAccessObject;
 
     private final JComboBox<String> departmentIdsComboBox = new JComboBox<>();
 
@@ -37,8 +37,8 @@ public class DepartmentPanel extends JPanel {
     private final DefaultTableModel defaultTableModel = new DefaultTableModel();
     private final JTable employeesTable = new JTable(defaultTableModel);
 
-    public DepartmentPanel(Manager manager) {
-        this.manager = manager;
+    public DepartmentPanel(DataAccessObject dataAccessObject) {
+        this.dataAccessObject = dataAccessObject;
 
         setLayout(new FlowLayout());
 
@@ -114,7 +114,7 @@ public class DepartmentPanel extends JPanel {
         String departmentId = (String) departmentIdsComboBox.getSelectedItem();
 
         if (departmentId != null) {
-            Department department = manager.getDepartment(departmentId);
+            Department department = dataAccessObject.getDepartment(departmentId);
 
             if (department != null) {
                 departmentIdTextField.setText(department.getDepartmentId());
@@ -133,7 +133,7 @@ public class DepartmentPanel extends JPanel {
     private void refreshDepartmentIdsComboBox() {
         departmentIdsComboBox.removeAllItems();
 
-        List<String> allDepartmentIds = manager.getAllDepartmentIds();
+        List<String> allDepartmentIds = dataAccessObject.getAllDepartmentIds();
 
         for (String departmentId : allDepartmentIds) {
             departmentIdsComboBox.addItem(departmentId);
@@ -143,7 +143,7 @@ public class DepartmentPanel extends JPanel {
     private void addDepartment() {
         String departmentId = departmentIdTextField.getText();
 
-        boolean isSuccessfullyAdded = manager.addDepartment(departmentId, nameTextField.getText());
+        boolean isSuccessfullyAdded = dataAccessObject.addDepartment(departmentId, nameTextField.getText());
 
         if (isSuccessfullyAdded) {
             departmentIdsComboBox.addItem(departmentId);
@@ -155,13 +155,13 @@ public class DepartmentPanel extends JPanel {
     }
 
     private void updateDepartment() {
-        manager.updateDepartment(departmentIdTextField.getText(), nameTextField.getText());
+        dataAccessObject.updateDepartment(departmentIdTextField.getText(), nameTextField.getText());
     }
 
     private void deleteDepartment() {
         String departmentId = departmentIdTextField.getText();
 
-        boolean isSuccessfullyDeleted = manager.deleteDepartment(departmentId);
+        boolean isSuccessfullyDeleted = dataAccessObject.deleteDepartment(departmentId);
 
         if (isSuccessfullyDeleted) {
             departmentIdsComboBox.removeItem(departmentId);

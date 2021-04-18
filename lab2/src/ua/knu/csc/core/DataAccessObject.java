@@ -12,11 +12,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Manager { // DAO (Data Access Object)
+public class DataAccessObject { // Data Access Object (DAO)
     private final Connection connection;
     private final Statement statement;
 
-    public Manager(String url, String user, String password) throws SQLException {
+    public DataAccessObject(String url, String user, String password) throws SQLException {
         connection = DriverManager.getConnection(url, user, password);
         statement = connection.createStatement();
     }

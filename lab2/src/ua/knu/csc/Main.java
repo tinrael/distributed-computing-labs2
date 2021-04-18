@@ -1,6 +1,6 @@
 package ua.knu.csc;
 
-import ua.knu.csc.core.Manager;
+import ua.knu.csc.core.DataAccessObject;
 import ua.knu.csc.ui.DepartmentPanel;
 import ua.knu.csc.ui.EmployeePanel;
 
@@ -22,11 +22,11 @@ public class Main {
         String password = "postgres";
 
         try {
-            Manager manager = new Manager(url, user, password);
+            DataAccessObject dataAccessObject = new DataAccessObject(url, user, password);
 
             SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
-                    createAndShowGUI(manager);
+                    createAndShowGUI(dataAccessObject);
                 }
             });
         } catch (SQLException throwable) {
@@ -34,14 +34,14 @@ public class Main {
         }
     }
 
-    private static void createAndShowGUI(Manager manager) {
+    private static void createAndShowGUI(DataAccessObject dataAccessObject) {
         JFrame mainWindow = new JFrame("lab2");
         mainWindow.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         JTabbedPane tabbedPane = new JTabbedPane();
 
-        tabbedPane.add("Employees", new EmployeePanel(manager));
-        tabbedPane.add("Departments", new DepartmentPanel(manager));
+        tabbedPane.add("Employees", new EmployeePanel(dataAccessObject));
+        tabbedPane.add("Departments", new DepartmentPanel(dataAccessObject));
 
         mainWindow.add(tabbedPane);
 

@@ -1,6 +1,6 @@
 package ua.knu.csc.ui;
 
-import ua.knu.csc.core.Manager;
+import ua.knu.csc.core.DataAccessObject;
 import ua.knu.csc.entity.Employee;
 
 import java.util.List;
@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class EmployeePanel extends JPanel {
-    private final Manager manager;
+    private final DataAccessObject dataAccessObject;
 
     private final JComboBox<String> employeeIdsComboBox = new JComboBox<>();
 
@@ -32,8 +32,8 @@ public class EmployeePanel extends JPanel {
     private final JButton buttonDelete = new JButton("Delete");
     private final JButton buttonRefresh = new JButton("Refresh");
 
-    public EmployeePanel(Manager manager) {
-        this.manager = manager;
+    public EmployeePanel(DataAccessObject dataAccessObject) {
+        this.dataAccessObject = dataAccessObject;
 
         setLayout(new FlowLayout());
 
@@ -110,7 +110,7 @@ public class EmployeePanel extends JPanel {
         String employeeId = (String) employeeIdsComboBox.getSelectedItem();
 
         if (employeeId != null) {
-            Employee employee = manager.getEmployee(employeeId);
+            Employee employee = dataAccessObject.getEmployee(employeeId);
 
             if (employee != null) {
                 employeeIdTextField.setText(employee.getEmployeeId());
@@ -127,7 +127,7 @@ public class EmployeePanel extends JPanel {
     private void refreshEmployeeIdsComboBox() {
         employeeIdsComboBox.removeAllItems();
 
-        List<String> allEmployeeIds = manager.getAllEmployeeIds();
+        List<String> allEmployeeIds = dataAccessObject.getAllEmployeeIds();
 
         for (String employeeId : allEmployeeIds) {
             employeeIdsComboBox.addItem(employeeId);
@@ -137,7 +137,7 @@ public class EmployeePanel extends JPanel {
     private void addEmployee() {
         String employeeId = employeeIdTextField.getText();
 
-        boolean isSuccessfullyAdded = manager.addEmployee(employeeId, forenameTextField.getText(),
+        boolean isSuccessfullyAdded = dataAccessObject.addEmployee(employeeId, forenameTextField.getText(),
                 surnameTextField.getText(), Long.parseLong(salaryTextField.getText()),
                 departmentIdTextField.getText());
 
@@ -151,7 +151,7 @@ public class EmployeePanel extends JPanel {
     }
 
     private void updateEmployee() {
-        manager.updateEmployee(employeeIdTextField.getText(), forenameTextField.getText(),
+        dataAccessObject.updateEmployee(employeeIdTextField.getText(), forenameTextField.getText(),
                 surnameTextField.getText(), Long.parseLong(salaryTextField.getText()),
                 departmentIdTextField.getText());
     }
@@ -159,7 +159,7 @@ public class EmployeePanel extends JPanel {
     private void deleteEmployee() {
         String employeeId = employeeIdTextField.getText();
 
-        boolean isSuccessfullyDeleted = manager.deleteEmployee(employeeId);
+        boolean isSuccessfullyDeleted = dataAccessObject.deleteEmployee(employeeId);
 
         if (isSuccessfullyDeleted) {
             employeeIdsComboBox.removeItem(employeeId);
