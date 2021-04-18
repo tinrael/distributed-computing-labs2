@@ -21,11 +21,11 @@ public class DataAccessObject { // Data Access Object (DAO)
         statement = connection.createStatement();
     }
 
-    public void stop() throws SQLException {
+    public synchronized void stop() throws SQLException {
         connection.close();
     }
 
-    public boolean addDepartment(String id, String name) {
+    public synchronized boolean addDepartment(String id, String name) {
         String sql = "INSERT INTO department VALUES " +
                 "('" + id + "', '" + name + "');";
 
@@ -43,7 +43,7 @@ public class DataAccessObject { // Data Access Object (DAO)
         }
     }
 
-    public boolean updateDepartment(String id, String name) {
+    public synchronized boolean updateDepartment(String id, String name) {
         String sql = "UPDATE department " +
                 "SET name = '" + name + "' " +
                 "WHERE department_id = '" + id + "';";
@@ -67,7 +67,7 @@ public class DataAccessObject { // Data Access Object (DAO)
         }
     }
 
-    public Department getDepartment(String departmentId) {
+    public synchronized Department getDepartment(String departmentId) {
         String sql = "SELECT name " +
                 "FROM department " +
                 "WHERE department_id = '" + departmentId + "';";
@@ -114,7 +114,7 @@ public class DataAccessObject { // Data Access Object (DAO)
         }
     }
 
-    public boolean deleteDepartment(String id) {
+    public synchronized boolean deleteDepartment(String id) {
         String sql = "DELETE FROM department WHERE department_id = '" + id + "';";
 
         try {
@@ -136,7 +136,7 @@ public class DataAccessObject { // Data Access Object (DAO)
         }
     }
 
-    public List<String> getAllDepartmentIds() {
+    public synchronized List<String> getAllDepartmentIds() {
         List<String> allDepartmentIds = new ArrayList<>();
 
         String sql = "SELECT department_id FROM department;";
@@ -157,7 +157,7 @@ public class DataAccessObject { // Data Access Object (DAO)
         return allDepartmentIds;
     }
 
-    public boolean addEmployee(String employeeId, String forename, String surname, long salary, String departmentId) {
+    public synchronized boolean addEmployee(String employeeId, String forename, String surname, long salary, String departmentId) {
         String sql = "INSERT INTO employee VALUES " +
                 "('" + employeeId + "', '" + forename +
                 "', '" + surname + "', " + salary + ", '" + departmentId + "');";
@@ -176,7 +176,7 @@ public class DataAccessObject { // Data Access Object (DAO)
         }
     }
 
-    public boolean updateEmployee(String employeeId, String forename, String surname, long salary, String departmentId) {
+    public synchronized boolean updateEmployee(String employeeId, String forename, String surname, long salary, String departmentId) {
         String sql = "UPDATE employee " +
                 "SET forename = '" + forename + "', surname = '" + surname + "', salary = " + salary + ", department_id = '" + departmentId + "' " +
                 "WHERE employee_id = '" + employeeId + "';";
@@ -200,7 +200,7 @@ public class DataAccessObject { // Data Access Object (DAO)
         }
     }
 
-    public Employee getEmployee(String id) {
+    public synchronized Employee getEmployee(String id) {
         String sql = "SELECT forename, surname, salary, department_id " +
                 "FROM employee " +
                 "WHERE employee_id = '" + id + "';";
@@ -233,7 +233,7 @@ public class DataAccessObject { // Data Access Object (DAO)
         }
     }
 
-    public boolean deleteEmployee(String id) {
+    public synchronized boolean deleteEmployee(String id) {
         String sql = "DELETE FROM employee WHERE employee_id = '" + id + "';";
 
         try {
@@ -255,7 +255,7 @@ public class DataAccessObject { // Data Access Object (DAO)
         }
     }
 
-    public List<String> getAllEmployeeIds() {
+    public synchronized List<String> getAllEmployeeIds() {
         List<String> allEmployeeIds = new ArrayList<>();
 
         String sql = "SELECT employee_id FROM employee;";
