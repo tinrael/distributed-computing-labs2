@@ -32,7 +32,7 @@ public class DepartmentPanel extends JPanel {
     private final JButton buttonAdd = new JButton("Add");
     private final JButton buttonUpdate = new JButton("Update");
     private final JButton buttonDelete = new JButton("Delete");
-    private final JButton buttonRefresh = new JButton("Refresh [combo box]");
+    private final JButton buttonRefresh = new JButton("Refresh");
 
     private final DefaultTableModel defaultTableModel = new DefaultTableModel();
     private final JTable employeesTable = new JTable(defaultTableModel);
@@ -45,13 +45,13 @@ public class DepartmentPanel extends JPanel {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(3, 2, 5, 5));
 
-        panel.add(new JLabel("choose department id"));
+        panel.add(new JLabel("Choose a department ID"));
         panel.add(departmentIdsComboBox);
 
-        panel.add(new JLabel("department id"));
+        panel.add(new JLabel("Department ID"));
         panel.add(departmentIdTextField);
 
-        panel.add(new JLabel("name"));
+        panel.add(new JLabel("Name"));
         panel.add(nameTextField);
 
         JPanel controlPanel = new JPanel();
@@ -66,6 +66,8 @@ public class DepartmentPanel extends JPanel {
         box.add(new JScrollPane(employeesTable));
 
         add(box);
+
+        buttonRefresh.setToolTipText("Incorporates changes from a database.");
 
         Object[] columnIdentifiers = {"employee_id", "forename", "surname", "salary", "department_id"};
         defaultTableModel.setColumnIdentifiers(columnIdentifiers);

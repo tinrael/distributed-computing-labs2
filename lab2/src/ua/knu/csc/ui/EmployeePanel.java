@@ -30,7 +30,7 @@ public class EmployeePanel extends JPanel {
     private final JButton buttonAdd = new JButton("Add");
     private final JButton buttonUpdate = new JButton("Update");
     private final JButton buttonDelete = new JButton("Delete");
-    private final JButton buttonRefresh = new JButton("Refresh [combo box]");
+    private final JButton buttonRefresh = new JButton("Refresh");
 
     public EmployeePanel(Manager manager) {
         this.manager = manager;
@@ -40,22 +40,22 @@ public class EmployeePanel extends JPanel {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(8, 2, 5, 5));
 
-        panel.add(new JLabel("choose employee id"));
+        panel.add(new JLabel("Choose an employee ID"));
         panel.add(employeeIdsComboBox);
 
-        panel.add(new JLabel("employee id"));
+        panel.add(new JLabel("Employee ID"));
         panel.add(employeeIdTextField);
 
-        panel.add(new JLabel("forename"));
+        panel.add(new JLabel("Forename"));
         panel.add(forenameTextField);
 
-        panel.add(new JLabel("surname"));
+        panel.add(new JLabel("Surname"));
         panel.add(surnameTextField);
 
-        panel.add(new JLabel("salary"));
+        panel.add(new JLabel("Salary"));
         panel.add(salaryTextField);
 
-        panel.add(new JLabel("department id"));
+        panel.add(new JLabel("Department ID"));
         panel.add(departmentIdTextField);
 
         panel.add(buttonAdd);
@@ -65,6 +65,8 @@ public class EmployeePanel extends JPanel {
         panel.add(buttonRefresh);
 
         add(panel);
+
+        buttonRefresh.setToolTipText("Incorporates changes from a database.");
 
         employeeIdsComboBox.addActionListener(new ActionListener() {
             @Override
