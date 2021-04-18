@@ -5,6 +5,7 @@ import ua.knu.csc.entity.Employee;
 
 import java.util.List;
 
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,31 +35,36 @@ public class EmployeePanel extends JPanel {
     public EmployeePanel(Manager manager) {
         this.manager = manager;
 
-        setLayout(new GridLayout(8, 2));
+        setLayout(new FlowLayout());
 
-        add(new JLabel("choose employee id"));
-        add(employeeIdsComboBox);
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(8, 2, 5, 5));
 
-        add(new JLabel("employee id"));
-        add(employeeIdTextField);
+        panel.add(new JLabel("choose employee id"));
+        panel.add(employeeIdsComboBox);
 
-        add(new JLabel("forename"));
-        add(forenameTextField);
+        panel.add(new JLabel("employee id"));
+        panel.add(employeeIdTextField);
 
-        add(new JLabel("surname"));
-        add(surnameTextField);
+        panel.add(new JLabel("forename"));
+        panel.add(forenameTextField);
 
-        add(new JLabel("salary"));
-        add(salaryTextField);
+        panel.add(new JLabel("surname"));
+        panel.add(surnameTextField);
 
-        add(new JLabel("department id"));
-        add(departmentIdTextField);
+        panel.add(new JLabel("salary"));
+        panel.add(salaryTextField);
 
-        add(buttonAdd);
-        add(buttonDelete);
+        panel.add(new JLabel("department id"));
+        panel.add(departmentIdTextField);
 
-        add(buttonUpdate);
-        add(buttonRefresh);
+        panel.add(buttonAdd);
+        panel.add(buttonDelete);
+
+        panel.add(buttonUpdate);
+        panel.add(buttonRefresh);
+
+        add(panel);
 
         employeeIdsComboBox.addActionListener(new ActionListener() {
             @Override
