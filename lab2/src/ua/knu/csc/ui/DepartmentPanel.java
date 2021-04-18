@@ -32,6 +32,7 @@ public class DepartmentPanel extends JPanel {
     private final JButton buttonAdd = new JButton("Add");
     private final JButton buttonUpdate = new JButton("Update");
     private final JButton buttonDelete = new JButton("Delete");
+    private final JButton buttonRefresh = new JButton("Refresh [combo box]");
 
     private final DefaultTableModel defaultTableModel = new DefaultTableModel();
     private final JTable employeesTable = new JTable(defaultTableModel);
@@ -57,6 +58,7 @@ public class DepartmentPanel extends JPanel {
         controlPanel.add(buttonAdd);
         controlPanel.add(buttonDelete);
         controlPanel.add(buttonUpdate);
+        controlPanel.add(buttonRefresh);
 
         Box box = Box.createVerticalBox();
         box.add(panel);
@@ -93,6 +95,13 @@ public class DepartmentPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 updateDepartment();
+            }
+        });
+
+        buttonRefresh.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                refreshDepartmentIdsComboBox();
             }
         });
 
