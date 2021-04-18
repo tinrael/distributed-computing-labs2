@@ -1,6 +1,7 @@
 package ua.knu.csc;
 
 import ua.knu.csc.core.Manager;
+import ua.knu.csc.ui.DepartmentPanel;
 import ua.knu.csc.ui.EmployeePanel;
 
 import java.sql.SQLException;
@@ -9,6 +10,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
+import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
@@ -36,7 +38,12 @@ public class Main {
         JFrame mainWindow = new JFrame("lab2");
         mainWindow.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        mainWindow.add(new EmployeePanel(manager));
+        JTabbedPane tabbedPane = new JTabbedPane();
+
+        tabbedPane.add("Employees", new EmployeePanel(manager));
+        tabbedPane.add("Departments", new DepartmentPanel(manager));
+
+        mainWindow.add(tabbedPane);
 
         mainWindow.pack();
 
