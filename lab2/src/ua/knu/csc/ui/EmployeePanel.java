@@ -29,6 +29,7 @@ public class EmployeePanel extends JPanel {
     private final JButton buttonAdd = new JButton("Add");
     private final JButton buttonUpdate = new JButton("Update");
     private final JButton buttonDelete = new JButton("Delete");
+    private final JButton buttonRefresh = new JButton("Refresh [combo box]");
 
     public EmployeePanel(Manager manager) {
         this.manager = manager;
@@ -57,6 +58,7 @@ public class EmployeePanel extends JPanel {
         add(buttonDelete);
 
         add(buttonUpdate);
+        add(buttonRefresh);
 
         employeeIdsComboBox.addActionListener(new ActionListener() {
             @Override
@@ -83,6 +85,13 @@ public class EmployeePanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 updateEmployee();
+            }
+        });
+
+        buttonRefresh.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                refreshEmployeeIdsComboBox();
             }
         });
 
