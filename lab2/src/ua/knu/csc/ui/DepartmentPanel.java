@@ -2,6 +2,7 @@ package ua.knu.csc.ui;
 
 import ua.knu.csc.core.Manager;
 import ua.knu.csc.entity.Department;
+import ua.knu.csc.entity.Employee;
 
 import java.util.List;
 
@@ -14,6 +15,8 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class DepartmentPanel extends JPanel {
     private final Manager manager;
@@ -26,6 +29,9 @@ public class DepartmentPanel extends JPanel {
     private final JButton buttonAdd = new JButton("Add");
     private final JButton buttonUpdate = new JButton("Update");
     private final JButton buttonDelete = new JButton("Delete");
+
+    private final DefaultTableModel defaultTableModel = new DefaultTableModel();
+    private final JTable employeesTable = new JTable(defaultTableModel);
 
     public DepartmentPanel(Manager manager) {
         this.manager = manager;
@@ -45,6 +51,9 @@ public class DepartmentPanel extends JPanel {
         add(buttonDelete);
 
         add(buttonUpdate);
+
+        Object[] columnIdentifiers = {"employee_id", "forename", "surname", "salary", "department_id"};
+        defaultTableModel.setColumnIdentifiers(columnIdentifiers);
 
         departmentIdsComboBox.addActionListener(new ActionListener() {
             @Override
@@ -86,6 +95,13 @@ public class DepartmentPanel extends JPanel {
             if (department != null) {
                 departmentIdTextField.setText(department.getDepartmentId());
                 nameTextField.setText(department.getName());
+
+                defaultTableModel.setRowCount(0);
+
+                for (Employee employee : department.getEmployees()) {
+                    Object[] rowData = {employee.getEmployeeId(), employee.getForename(), employee.getSurname(), employee.getSalary(), employee.getDepartmentId()};
+                    defaultTableModel.addRow(rowData);
+                }
             }
         }
     }
